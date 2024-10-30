@@ -2,7 +2,7 @@ import numpy as np
 import cv2 as cv
 import os
 import argparse
-import pickle
+import json
 
 
 def load_images_from_path(img_path):
@@ -56,17 +56,17 @@ def calib_camera_from_chessboard(images, board_pattern, board_cellsize, K=None, 
 
     # Calibrate the camera
     return cv.calibrateCamera(obj_points, img_points, gray.shape[::-1], K, dist_coeff, flags=calib_flags)
-\
+
 def save_calibration_data(calibration_data, file_path):
-    with open(file_path, 'wb') as f:
-        pickle.dump(calibration_data, f)
+    with open(file_path, 'w') as f:
+        json.dump(calibration_data, f, indent=4)
     print(f"Calibration data saved to {file_path}")
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Camera calibration using chessboard images.')
     parser.add_argument('img_path', type=str, help='Path to the directory containing images.')
     parser.add_argument('board_pattern', type=int, nargs=2, help='Chessboard pattern as two integers: columns rows.')
-    parser.add_argument('--board_cellsize', type=float, default=0.0025, help='Size of each chessboard cell in meters (default: 0.0025).')
+    parser.add_argument('board_cellsize', type=float, default=0.0025, help='Size of each chessboard cell in meters (default: 0.0025).')
     parser.add_argument('save_path', type=str, help='Path to save calibration results.')
     args = parser.parse_args()
 
@@ -78,11 +78,11 @@ if __name__ == '__main__':
     board_pattern = tuple(args.board_pattern)
     rms, K, dist_coeff, rvecs, tvecs,  = calib_camera_from_chessboard(images, board_pattern, args.board_cellsize)
     calibration_data = {
-        'rvecs': rvecs,
-        'tvecs': tvecs,
         'rms': rms,
-        'K': K,
-        'dist_coeff': dist_coeff
+        'K': K.tolist(),
+        'dist_coeff': dist_coeff.tolist(), 
+        'rvecs': [rvec.tolist() for rvec in rvecs],
+        'tvecs': [tvec.tolist() for tvec in tvecs]
     }
 
     save_calibration_data(calibration_data, args.save_path)
