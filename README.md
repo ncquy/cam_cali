@@ -48,7 +48,7 @@ This project performs camera calibration using images with chessboard patterns t
 3. Visualize Results:
    Run visualize.py to display undistorted images and visualize the camera poses in 3D.
    ```bash
-   python visualize_camera_pose.py 'results/cali.json'
+   python visualize_camera_pose.py 'results/cali.json' 9 6
 
 
 ## Results and Report
