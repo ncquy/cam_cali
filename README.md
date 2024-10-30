@@ -76,7 +76,7 @@ The results after testing different models are summarized in the table below.
 
 4.  Camera position visualization:
 <p align='center'>
-  <img width="200px" src="https://github.com/ncquy/camera_calibration/blob/main/data/cam_pos.png" />
+  <img width="400px" src="https://github.com/ncquy/camera_calibration/blob/main/data/cam_pos.png" />
   <br/>
   <i> The visualization of the camera position in 3D space.</i>
 </p>
