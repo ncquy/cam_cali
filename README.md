@@ -33,7 +33,7 @@ This project performs camera calibration using images with chessboard patterns t
 - `visualize.py`: Script for visualizing undistorted images and camera poses.
 
 ## Usage
-2. Select and Process Images:
+1. Select and Process Images:
    Use `image_selection.py` to filter and preprocess chessboard images for calibration.
    ```bash
    python image_selection.py -video_file 'data/video/logitech.mp4' -board_pattern 9 6 -save_path 'data/img'
@@ -42,10 +42,10 @@ This project performs camera calibration using images with chessboard patterns t
 2. Run Camera Calibration:
    Execute `camera_calibration.py` to perform camera calibration. This script will calculate the intrinsic parameters and save them in `results/`.
    ```bash
-   python camera_calibration.py 'data/img/' 9 6 0.025
+   python camera_calibration.py 'data/img' 9 6 1 'results/cali_result.json'
   
 
-2. Visualize Results:
+3. Visualize Results:
    Run visualize.py to display undistorted images and visualize the camera poses in 3D.
    ```bash
    python visualize_camera_pose.py 'results/cali.json'
@@ -54,7 +54,7 @@ This project performs camera calibration using images with chessboard patterns t
 ## Results and Report
 1. The chessboard image example with corners.
 <p align='center'>
-  <img width="600px" src="https://github.com/ncquy/camera_calibration/blob/main/data/img_coner.png" />
+  <img width="400px" src="https://github.com/ncquy/camera_calibration/blob/main/data/img_coner.png" />
   <br/>
   <i> The example shows a chessboard image with corners.</i>
 </p>
@@ -69,14 +69,14 @@ The results after testing different models are summarized in the table below.
 
 3.  The undistorted image:
 <p align='center'>
-  <img width="400px" src="https://github.com/ncquy/camera_calibration/blob/main/data/cam_pos.png" />
+  <img width="600px" src="https://github.com/ncquy/camera_calibration/blob/main/data/undistort.png" />
   <br/>
   <i> The undistorted image.</i>
 </p>
 
 4.  Camera position visualization:
 <p align='center'>
-  <img width="400px" src="https://github.com/ncquy/camera_calibration/blob/main/data/cam_pos.png" />
+  <img width="200px" src="https://github.com/ncquy/camera_calibration/blob/main/data/cam_pos.png" />
   <br/>
   <i> The visualization of the camera position in 3D space.</i>
 </p>
